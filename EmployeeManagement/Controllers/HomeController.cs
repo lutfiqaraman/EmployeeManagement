@@ -21,7 +21,7 @@ namespace EmployeeManagement.Controllers
             return EmployeeRepository.GetEmployee(1).Name;
         }
 
-        public ViewResult Details()
+        public ActionResult Details()
         {
             Employee model = EmployeeRepository.GetEmployee(1);
             return View(model);
