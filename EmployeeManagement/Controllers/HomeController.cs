@@ -1,4 +1,5 @@
 ﻿using EmployeeManagement.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement.Controllers
 {
-    public class HomeController
+    public class HomeController : Controller
     {
         private readonly IEmployeeRepository EmployeeRepository;
 
@@ -18,6 +19,12 @@ namespace EmployeeManagement.Controllers
         public string Index()
         {
             return EmployeeRepository.GetEmployee(1).Name;
+        }
+
+        public ViewResult Details()
+        {
+            Employee model = EmployeeRepository.GetEmployee(1);
+            return View(model);
         }
     }
 }
