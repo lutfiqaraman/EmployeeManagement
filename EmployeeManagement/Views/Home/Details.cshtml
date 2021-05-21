@@ -1,8 +1,19 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml">
+﻿@model EmployeeManagement.Models.Employee
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
+    <title>@ViewData["PageTile"]</title>
 </head>
 <body>
-    <h1>Details Page</h1>
+    <h3>@ViewData["PageTitle"]</h3>
+
+    <div>
+        Name: @Model.Name
+    </div>
+
+    <div>
+        Email: @Model.Email
+    </div>
+
 </body>
 </html>

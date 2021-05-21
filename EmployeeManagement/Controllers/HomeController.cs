@@ -23,6 +23,8 @@ namespace EmployeeManagement.Controllers
 
         public ActionResult Details()
         {
+            ViewData["PageTitle"] = "Employee Details";
+
             Employee model = EmployeeRepository.GetEmployee(1);
             return View(model);
         }
