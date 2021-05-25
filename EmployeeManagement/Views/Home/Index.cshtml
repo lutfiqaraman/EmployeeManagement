@@ -4,20 +4,28 @@
     ViewBag.Title = "Employees List";
 }
 
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Department</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var employee in Model)
-        {
-            <tr>
-                <td>@employee.Name</td>
-                <td>@employee.Department</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="row">
+    @foreach (var employee in Model)
+    {
+        <div class="col-md-3">
+            <div class="card mx-1 my-3">
+                <div class="card-header">
+                    <h5 class="card-title">@employee.Name</h5>
+                </div>
+
+                <img class="card-img-top" src="~/images/noimage.png" />
+
+                <div class="card-body">
+                    <p class="card-text">Email: @employee.Email</p>
+                    <p class="card-text">Department: @employee.Department</p>
+                </div>
+
+                <div class="card-footer text-center">
+                    <a href="#" class="btn btn-primary">View</a>
+                    <a href="#" class="btn btn-primary">Edit</a>
+                    <a href="#" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
