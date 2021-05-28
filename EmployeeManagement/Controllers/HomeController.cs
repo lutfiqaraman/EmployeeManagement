@@ -23,18 +23,26 @@ namespace EmployeeManagement.Controllers
 
         public ActionResult Details(int? id)
         {
-            HomeDetailsViewModel homeDetailsViewModel = new()
+            HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
-                Employee = EmployeeRepository.GetEmployee(id??1),
+                Employee = EmployeeRepository.GetEmployee(id ?? 1),
                 PageTitle = "Employee Details"
             };
 
             return View(homeDetailsViewModel);
         }
 
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Employee employee)
+        {
+            Employee addEmployee = EmployeeRepository.Add(employee);
+            return RedirectToAction("details", new { id = addEmployee.Id });
         }
     }
 }
