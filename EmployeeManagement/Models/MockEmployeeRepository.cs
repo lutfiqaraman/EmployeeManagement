@@ -13,10 +13,10 @@ namespace EmployeeManagement.Models
         {
             employeeList = new List<Employee>
             {
-                new Employee() { Id = 1, Name = "Mary" , Department = "HR",  Email = "mary@mockemp.com" },
-                new Employee() { Id = 2, Name = "Jade" , Department = "IT",  Email = "jade@mockemp.com" },
-                new Employee() { Id = 3, Name = "John" , Department = "IT",  Email = "john@mockemp.com" },
-                new Employee() { Id = 4, Name = "Ryan" , Department = "FI",  Email = "ryan@mockemp.com" }
+                new Employee() { Id = 1, Name = "Mary" , Department = Dept.HR,  Email = "mary@mockemp.com" },
+                new Employee() { Id = 2, Name = "Jade" , Department = Dept.IT,  Email = "jade@mockemp.com" },
+                new Employee() { Id = 3, Name = "John" , Department = Dept.IT,  Email = "john@mockemp.com" },
+                new Employee() { Id = 4, Name = "Ryan" , Department = Dept.Financial,  Email = "ryan@mockemp.com" }
             };
         }
 
