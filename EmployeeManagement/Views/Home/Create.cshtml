@@ -22,7 +22,10 @@
     <div class="mb-3">
         <label asp-for="Department" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-12">
-            <select class="form-select" asp-for="Department" asp-items="Html.GetEnumSelectList<EmployeeManagement.Models.Dept>()"></select>
+            <select class="form-select" asp-for="Department" asp-items="Html.GetEnumSelectList<EmployeeManagement.Models.Dept>()">
+                <option value="">Please select</option>
+            </select>
+            <span asp-validation-for="Department" class="text-danger"></span>
         </div>
     </div>
     <div>
