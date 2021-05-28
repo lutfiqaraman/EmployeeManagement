@@ -21,7 +21,7 @@ namespace EmployeeManagement.Controllers
             return View(model);
         }
 
-        public ActionResult Details(int? id)
+        public IActionResult Details(int? id)
         {
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
@@ -33,16 +33,21 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(Employee employee)
+        public IActionResult Create(Employee employee)
         {
-            Employee addEmployee = EmployeeRepository.Add(employee);
-            return RedirectToAction("details", new { id = addEmployee.Id });
+            if (ModelState.IsValid)
+            {
+                Employee newEmployee = EmployeeRepository.Add(employee);
+                return RedirectToAction("details", new { id = newEmployee.Id });
+            }
+
+            return View();
         }
     }
 }
