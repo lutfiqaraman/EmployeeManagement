@@ -2,9 +2,8 @@
 
 namespace EmployeeManagement.Presentation.ViewModels
 {
-    public class HomeDetailsViewModel
+    public class EmployeeViewModel
     {
         public Employee Employee { get; set; }
-        public string PageTitle { get; set; }
     }
 }

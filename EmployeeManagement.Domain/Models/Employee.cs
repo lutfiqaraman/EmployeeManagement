@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace EmployeeManagement.Models
+namespace EmployeeManagement.Domain.Models
 {
     public class Employee
     {
@@ -15,6 +11,6 @@ namespace EmployeeManagement.Models
         [RegularExpression(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$", ErrorMessage = "Invalid Email Format")]
         public string Email { get; set; }
         [Required]
-        public Dept Department { get; set; }
+        public Department Department { get; set; }
     }
 }
