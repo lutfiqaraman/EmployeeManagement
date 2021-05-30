@@ -1,11 +1,11 @@
-﻿@model IEnumerable<EmployeeManagement.Domain.Models.Employee>
+﻿@model EmployeeManagement.Presentation.Models.Employees.EmployeeListViewModel
 
 @{ 
-    ViewBag.Title = "Employees List";
+    ViewBag.Title = "EMS - Employees List";
 }
 
 <div class="row">
-    @foreach (var employee in Model)
+    @foreach (var employee in Model.Employees)
     {
         <div class="col-md-3">
             <div class="card mx-1 my-3">

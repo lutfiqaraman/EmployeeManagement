@@ -1,12 +1,12 @@
-﻿@model EmployeeManagement.Presentation.ViewModels.EmployeeViewModel;
+﻿@model EmployeeManagement.Presentation.Models.Employees.EmployeeViewModel
 
 @{
-    ViewBag.Title = "Create Employee";
+    ViewBag.Title = "EMS - Create Employee";
 }
 
 <form asp-controller="home" asp-action="create" method="post">
     <div class="mb-3">
-        <label asp-for="Employee.Email" class="col-sm-2 col-form-label"></label>
+        <label asp-for="Employee.Name" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-12">
             <input asp-for="Employee.Name" class="form-control" placeholder="Name"/>
             <span asp-validation-for="Employee.Name" class="text-danger"></span>

@@ -1,7 +1,7 @@
 ﻿using EmployeeManagement.DataAccess.Repositories.Employees;
 using EmployeeManagement.DataAccess.Repositories.Employees.Dto;
 using EmployeeManagement.Domain.Models;
-using EmployeeManagement.Presentation.ViewModels;
+using EmployeeManagement.Presentation.Models.Employees;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -18,17 +18,24 @@ namespace EmployeeManagement.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<EmployeeDto> model = EmployeeRepository.GetAllEmployees();
+            IReadOnlyList<EmployeeDto> employees = 
+                (IReadOnlyList<EmployeeDto>) EmployeeRepository.GetAllEmployees();
+
+            var model = new EmployeeListViewModel 
+            {
+                Employees = employees
+            };
+
             return View(model);
         }
 
         public IActionResult Details(int? id)
         {
-            HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
-            {
+            //HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
+            //{
                 //Employee = EmployeeRepository.GetEmployee(id ?? 1),
                 //PageTitle = "Employee Details"
-            };
+            //};
 
             //return View(homeDetailsViewModel);
             return View();
