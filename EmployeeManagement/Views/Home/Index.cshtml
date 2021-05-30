@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EmployeeManagement.Presentation.ViewModels.EmployeeViewModel>
+﻿@model IEnumerable<EmployeeManagement.Domain.Models.Employee>
 
 @{ 
     ViewBag.Title = "Employees List";
@@ -10,18 +10,18 @@
         <div class="col-md-3">
             <div class="card mx-1 my-3">
                 <div class="card-header">
-                    <h5 class="card-title">@employee.Employee.Name</h5>
+                    <h5 class="card-title">@employee.Name</h5>
                 </div>
 
                 <img class="card-img-top" src="~/images/noimage.png" asp-append-version="true" />
 
                 <div class="card-body">
-                    <p class="card-text">Email: @employee.Employee.Email</p>
-                    <p class="card-text">Department: @employee.Employee.Department</p>
+                    <p class="card-text">Email: @employee.Email</p>
+                    <p class="card-text">Department: @employee.Department</p>
                 </div>
 
                 <div class="card-footer text-center">
-                    <a asp-controller="home" asp-action="details" asp-route-id="@employee.Employee.Id" class="btn btn-primary" title="view">
+                    <a asp-controller="home" asp-action="details" asp-route-id="@employee.Id" class="btn btn-primary" title="view">
                         <i class="fa fa-eye"></i>
                     </a>
                     <a href="#" class="btn btn-primary" title="edit">

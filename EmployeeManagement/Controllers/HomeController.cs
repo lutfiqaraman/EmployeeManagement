@@ -1,4 +1,5 @@
 ﻿using EmployeeManagement.DataAccess.Repositories.Employees;
+using EmployeeManagement.DataAccess.Repositories.Employees.Dto;
 using EmployeeManagement.Domain.Models;
 using EmployeeManagement.Presentation.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -17,9 +18,8 @@ namespace EmployeeManagement.Controllers
 
         public IActionResult Index()
         {
-            //IEnumerable<Employee> model = EmployeeRepository.GetAllEmployees();
-            //return View(model);
-            return View();
+            IEnumerable<EmployeeDto> model = EmployeeRepository.GetAllEmployees();
+            return View(model);
         }
 
         public IActionResult Details(int? id)

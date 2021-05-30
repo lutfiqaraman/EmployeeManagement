@@ -1,3 +1,4 @@
+using EmployeeManagement.DataAccess;
 using EmployeeManagement.DataAccess.EntityFramework;
 using EmployeeManagement.DataAccess.Repositories.Employees;
 using Microsoft.AspNetCore.Builder;
@@ -28,6 +29,7 @@ namespace EmployeeManagement
 
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddDAServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
