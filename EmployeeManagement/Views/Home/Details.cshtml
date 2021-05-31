@@ -4,34 +4,37 @@
     ViewBag.Title = "Employees Details";
 }
 
-<div class="row justify-content-center m-3">
-    <div class="col-sm-8">
-        <div class="card">
+<div class="row justify-content-center">
+    <div class="col-md-3">
+        <div class="card my-1">
+            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
 
-            <div class="card-header">
-                <h1>@Model.Employee.Name</h1>
+                <img class="img-fluid" src="~/images/noimage.png" asp-append-version="true" alt="Photo of the person" />
+
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Employee.Name</h5>
+                    <hr />
+                    <p class="card-text">
+                        ID: @Model.Employee.Id
+                        <br />
+                        Email: @Model.Employee.Email
+                        <br />
+                        Department: @Model.Employee.Department
+                    </p>
+                </div>
+
+                <div class="card-footer text-center">
+                    <a asp-controller="home" asp-action="index" class="btn btn-primary" title="back">
+                        <i class="fa fa-backward"></i>
+                    </a>
+                    <a href="#" class="btn btn-primary" title="edit">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="#" class="btn btn-danger" title="delete">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </div>
+
             </div>
-
-            <div class="card-body text-center">
-                <img class="card-img-top" src="~/images/noimage.png" alt="Photo of the person" />
-
-                <p>Employee ID: @Model.Employee.Id</p>
-                <p>Employee Email: @Model.Employee.Email</p>
-                <p>Employee Department: @Model.Employee.Department</p>
-            </div>
-
-            <div class="card-footer text-center">
-                <a asp-controller="home" asp-action="index" class="btn btn-primary" title="back">
-                    <i class="fa fa-backward"></i>
-                </a>
-                <a href="#" class="btn btn-primary" title="edit">
-                    <i class="fa fa-edit"></i>
-                </a>
-                <a href="#" class="btn btn-danger" title="delete">
-                    <i class="fa fa-trash"></i>
-                </a>
-            </div>
-
         </div>
-    </div>
 </div>
