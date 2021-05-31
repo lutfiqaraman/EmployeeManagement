@@ -31,14 +31,12 @@ namespace EmployeeManagement.Controllers
 
         public IActionResult Details(int? id)
         {
-            //HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
-            //{
-                //Employee = EmployeeRepository.GetEmployee(id ?? 1),
-                //PageTitle = "Employee Details"
-            //};
+            EmployeeViewModel employeeViewModel = new EmployeeViewModel()
+            {
+                Employee = EmployeeRepository.GetEmployee(id ?? 1),
+            };
 
-            //return View(homeDetailsViewModel);
-            return View();
+            return View(employeeViewModel);
         }
 
         [HttpGet]

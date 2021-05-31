@@ -31,14 +31,17 @@ namespace EmployeeManagement.DataAccess.Repositories.Employees
         public IEnumerable<EmployeeDto> GetAllEmployees()
         {
             var employees = Context.Employees;
-            List<EmployeeDto> lstEmployees = Mapper.Map<List<EmployeeDto>>(employees);
+            List<EmployeeDto> Employees = Mapper.Map<List<EmployeeDto>>(employees);
             
-            return lstEmployees;
+            return Employees;
         }
 
         public EmployeeDto GetEmployee(int Id)
         {
-            throw new System.NotImplementedException();
+            Employee employee    = Context.Employees.Find(Id);
+            EmployeeDto Employee = Mapper.Map<EmployeeDto>(employee);
+
+            return Employee;
         }
 
         public Task UpdateEmployee(EmployeeDto employee)
