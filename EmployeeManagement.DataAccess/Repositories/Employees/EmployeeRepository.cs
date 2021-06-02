@@ -18,14 +18,25 @@ namespace EmployeeManagement.DataAccess.Repositories.Employees
             Mapper  = mapper;
         }
 
-        public Task CreateEmployee(EmployeeDto employee)
+        public EmployeeDto CreateEmployee(EmployeeDto employee)
         {
-            throw new System.NotImplementedException();
+            Employee Employee = Mapper.Map<Employee>(employee);
+            
+            Context.Employees.Add(Employee);
+            Context.SaveChanges();
+
+            return employee;
         }
 
-        public Task DeleteEmployee(int Id)
+        public async Task DeleteEmployee(int Id)
         {
-            throw new System.NotImplementedException();
+            Employee employee = Context.Employees.Find(Id);
+
+            if (employee != null)
+            {
+                Context.Employees.Remove(employee);
+                await Context.SaveChangesAsync();
+            }
         }
 
         public IEnumerable<EmployeeDto> GetAllEmployees()
@@ -44,9 +55,14 @@ namespace EmployeeManagement.DataAccess.Repositories.Employees
             return Employee;
         }
 
-        public Task UpdateEmployee(EmployeeDto employee)
+        public async Task UpdateEmployee(EmployeeDto employee)
         {
-            throw new System.NotImplementedException();
+            Employee Employee = Mapper.Map<Employee>(employee);
+
+            var updateEmployee = Context.Employees.Attach(Employee);
+            updateEmployee.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+            await Context.SaveChangesAsync();
         }
     }
 }

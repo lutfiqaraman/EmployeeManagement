@@ -9,7 +9,7 @@ namespace EmployeeManagement.DataAccess.Repositories.Employees
     {
         EmployeeDto GetEmployee(int Id);
         IEnumerable<EmployeeDto> GetAllEmployees();
-        Task CreateEmployee(EmployeeDto employee);
+        EmployeeDto CreateEmployee(EmployeeDto employee);
         Task UpdateEmployee(EmployeeDto employee);
         Task DeleteEmployee(int Id);
     }

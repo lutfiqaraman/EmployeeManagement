@@ -1,6 +1,5 @@
 ﻿using EmployeeManagement.DataAccess.Repositories.Employees;
 using EmployeeManagement.DataAccess.Repositories.Employees.Dto;
-using EmployeeManagement.Domain.Models;
 using EmployeeManagement.Presentation.Models.Employees;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -46,13 +45,13 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Employee employee)
+        public IActionResult Create(EmployeeDto employee)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    Employee newEmployee = EmployeeRepository.CreateEmployee(employee);
-            //    return RedirectToAction("details", new { id = newEmployee.Id });
-            //}
+            if (ModelState.IsValid)
+            {
+                EmployeeDto newEmployee = EmployeeRepository.CreateEmployee(employee);
+                return RedirectToAction("details", new { id = newEmployee.Id });
+            }
 
             return View();
         }
