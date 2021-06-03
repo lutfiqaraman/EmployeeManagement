@@ -25,6 +25,8 @@ namespace EmployeeManagement.DataAccess.Repositories.Employees
             Context.Employees.Add(Employee);
             Context.SaveChanges();
 
+            employee.Id = Employee.Id;
+
             return employee;
         }
 
