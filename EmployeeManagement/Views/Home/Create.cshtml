@@ -1,4 +1,4 @@
-﻿@model EmployeeManagement.Presentation.Models.Employees.EmployeeViewModel
+﻿@model EmployeeManagement.Presentation.Models.Employees.EmployeeCreateViewModel
 
 @{
     ViewBag.Title = "EMS - Create Employee";
@@ -6,26 +6,26 @@
 
 <form asp-controller="home" asp-action="create" method="post">
     <div class="mb-3">
-        <label asp-for="Employee.Name" class="col-sm-2 col-form-label"></label>
+        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-12">
-            <input asp-for="Employee.Name" class="form-control" placeholder="Name"/>
-            <span asp-validation-for="Employee.Name" class="text-danger"></span>
+            <input asp-for="Name" class="form-control" placeholder="Name"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
     </div>
     <div class="mb-3">
-        <label asp-for="Employee.Email" class="col-sm-2 col-form-label"></label>
+        <label asp-for="Email" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-12">
-            <input asp-for="Employee.Email" class="form-control" placeholder="Email" />
-            <span asp-validation-for="Employee.Email" class="text-danger"></span>
+            <input asp-for="Email" class="form-control" placeholder="Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
         </div>  
     </div>
     <div class="mb-3">
-        <label asp-for="Employee.Department" class="col-sm-2 col-form-label"></label>
+        <label asp-for="Department" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-12">
-            <select class="form-select" asp-for="Employee.Department" asp-items="Html.GetEnumSelectList<EmployeeManagement.Domain.Models.Department>()">
+            <select class="form-select" asp-for="Department" asp-items="Html.GetEnumSelectList<EmployeeManagement.Domain.Models.Department>()">
                 <option value="">Please select</option>
             </select>
-            <span asp-validation-for="Employee.Department" class="text-danger"></span>
+            <span asp-validation-for="Department" class="text-danger"></span>
         </div>
     </div>
     <div>
