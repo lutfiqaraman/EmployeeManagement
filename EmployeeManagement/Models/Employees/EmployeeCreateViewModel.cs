@@ -10,7 +10,6 @@ namespace EmployeeManagement.Presentation.Models.Employees
         public string Email { get; set; }
         public Department Department { get; set; }
         public IFormFile Photo { get; set; }
-
         public CreateEmployeeDto Employee { get; set; }
     }
 }

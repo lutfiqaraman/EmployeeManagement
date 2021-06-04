@@ -67,10 +67,10 @@ namespace EmployeeManagement.Controllers
 
                 EmployeeDto newEmployee = new EmployeeDto
                 {
-                    Name  = model.Name,
-                    Email = model.Email,
+                    Name       = model.Name,
+                    Email      = model.Email,
                     Department = model.Department,
-                    PhotoPath = fileName
+                    PhotoPath  = fileName
                 };
 
                 EmployeeRepository.CreateEmployee(newEmployee);
