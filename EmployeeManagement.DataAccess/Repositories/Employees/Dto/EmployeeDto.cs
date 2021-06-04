@@ -8,5 +8,6 @@ namespace EmployeeManagement.DataAccess.Repositories.Employees.Dto
         public string Name { get; set; }
         public string Email { get; set; }
         public Department Department { get; set; }
+        public string PhotoPath { get; set; }
     }
 }
