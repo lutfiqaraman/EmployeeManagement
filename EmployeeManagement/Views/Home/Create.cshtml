@@ -4,21 +4,24 @@
     ViewBag.Title = "EMS - Create Employee";
 }
 
-<form asp-controller="home" asp-action="create" method="post">
+<form enctype="multipart/form-data" asp-controller="home" asp-action="create" method="post">
+
     <div class="mb-3">
         <label asp-for="Name" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-12">
-            <input asp-for="Name" class="form-control" placeholder="Name"/>
+            <input asp-for="Name" class="form-control" placeholder="Name" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
     </div>
+
     <div class="mb-3">
         <label asp-for="Email" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-12">
             <input asp-for="Email" class="form-control" placeholder="Email" />
             <span asp-validation-for="Email" class="text-danger"></span>
-        </div>  
+        </div>
     </div>
+
     <div class="mb-3">
         <label asp-for="Department" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-12">
@@ -28,7 +31,16 @@
             <span asp-validation-for="Department" class="text-danger"></span>
         </div>
     </div>
+
+    <div class="mb-3">
+        <label asp-for="Photo" class="col-sm-2 col-form-label">Photo</label>
+        <div class="col-sm-12">
+            <input asp-for="Photo" class="form-control" />
+        </div>
+    </div>
+
     <div>
         <button type="submit" class="btn btn-primary">Create</button>
     </div>
+
 </form>

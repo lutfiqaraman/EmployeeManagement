@@ -7,6 +7,8 @@
 <div class="row">
     @foreach (var employee in Model.Employees)
     {
+        string photoPath = "~/images/" + (employee.PhotoPath ?? "noimage.png");
+
         <div class="col-md-3">
             <div class="card mx-1 my-3">
 
@@ -14,7 +16,7 @@
                     <h5 class="card-title">@employee.Name</h5>
                 </div>
 
-                <img class="card-img-top" src="~/images/noimage.png" asp-append-version="true" />
+                <img class="card-img-top empimage" src="@photoPath" asp-append-version="true" />
 
                 <div class="card-body">
                     <p class="card-text">Email: @employee.Email</p>

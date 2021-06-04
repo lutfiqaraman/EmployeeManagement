@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Employees Details";
+    string photoPath = "~/images/" + (Model.Employee.PhotoPath ?? "noimage.png");
 }
 
 <div class="row justify-content-center">
@@ -9,7 +10,7 @@
         <div class="card my-1">
             <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
 
-                <img class="img-fluid" src="~/images/noimage.png" asp-append-version="true" alt="Photo of the person" />
+                <img class="img-fluid empimage" src="@photoPath" asp-append-version="true" alt="Photo of the person" />
 
                 <div class="card-body">
                     <h5 class="card-title">@Model.Employee.Name</h5>
