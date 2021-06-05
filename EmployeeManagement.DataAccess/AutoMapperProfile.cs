@@ -10,6 +10,8 @@ namespace EmployeeManagement.DataAccess
         {
             CreateMap<Employee, EmployeeDto>();
             CreateMap<EmployeeDto, Employee>();
+            CreateMap<CreateEditEmployeeDto, Employee>();
+            CreateMap<Employee, CreateEditEmployeeDto>();
         }
     }
 }

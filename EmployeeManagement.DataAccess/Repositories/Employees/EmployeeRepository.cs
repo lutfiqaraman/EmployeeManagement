@@ -18,7 +18,7 @@ namespace EmployeeManagement.DataAccess.Repositories.Employees
             Mapper  = mapper;
         }
 
-        public EmployeeDto CreateEmployee(EmployeeDto employee)
+        public CreateEditEmployeeDto CreateEmployee(CreateEditEmployeeDto employee)
         {
             Employee Employee = Mapper.Map<Employee>(employee);
             
@@ -57,14 +57,16 @@ namespace EmployeeManagement.DataAccess.Repositories.Employees
             return Employee;
         }
 
-        public async Task UpdateEmployee(EmployeeDto employee)
+        public CreateEditEmployeeDto UpdateEmployee(CreateEditEmployeeDto employee)
         {
             Employee Employee = Mapper.Map<Employee>(employee);
 
             var updateEmployee = Context.Employees.Attach(Employee);
             updateEmployee.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
 
-            await Context.SaveChangesAsync();
+            Context.SaveChanges();
+
+            return employee;
         }
     }
 }
