@@ -35,6 +35,14 @@ namespace EmployeeManagement.Controllers
 
         public IActionResult Details(int? id)
         {
+            EmployeeDto employee = EmployeeRepository.GetEmployee(id.Value);
+            
+            if (employee == null)
+            {
+                Response.StatusCode = 404;
+                return View("EmployeeNotFound");
+            }
+
             EmployeeViewModel employeeViewModel = new EmployeeViewModel()
             {
                 Employee = EmployeeRepository.GetEmployee(id ?? 1),
