@@ -12,6 +12,7 @@ namespace EmployeeManagement.Presentation.Controllers
                 case 404:
                     ViewBag.ErrorMsg = "The resource cannot be found";
                     break;
+
                 default:
                     break;
             }
