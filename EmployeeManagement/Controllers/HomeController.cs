@@ -16,7 +16,7 @@ namespace EmployeeManagement.Controllers
 
         public HomeController(IEmployeeRepository employeeRepository, IWebHostEnvironment webHostEnvironment)
         {
-            EmployeeRepository = employeeRepository;
+            EmployeeRepository    = employeeRepository;
             WebHostingEnvironment = webHostEnvironment;
         }
 
