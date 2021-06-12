@@ -11,6 +11,7 @@ namespace EmployeeManagement.DataAccess.EntityFramework
         }
 
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<LogEntry> LogEntries { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
