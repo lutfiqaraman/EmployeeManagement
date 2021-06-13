@@ -43,8 +43,10 @@ namespace EmployeeManagement
             }
 
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
 
+            app.UseAuthentication();
+
+            app.UseMvcWithDefaultRoute();
             app.UseRouting();
             
             app.UseEndpoints(endpoints =>
