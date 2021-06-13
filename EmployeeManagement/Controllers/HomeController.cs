@@ -35,7 +35,6 @@ namespace EmployeeManagement.Controllers
 
         public IActionResult Details(int? id)
         {
-            throw new Exception("exception is here ...");
             EmployeeDto employee = EmployeeRepository.GetEmployee(id.Value);
             
             if (employee == null)
