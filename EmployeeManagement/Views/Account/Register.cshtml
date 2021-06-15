@@ -1,5 +1,9 @@
 ﻿@model EmployeeManagement.Presentation.Models.Users.RegisterViewModel
 
+@{
+    ViewBag.Title = "EMS - User Registration";
+}
+
 <h1>User Registration</h1>
 
 <div class="row">
@@ -13,7 +17,7 @@
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
             </div>
-            
+
             <div class="mb-3">
                 <label asp-for="Password" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-12">
@@ -21,7 +25,7 @@
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
             </div>
-            
+
             <div class="mb-3">
                 <label asp-for="ConfirmPassword" class="col-sm-2 col-form-label"></label>
                 <div class="col-sm-12">
@@ -29,11 +33,11 @@
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
             </div>
-            
+
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">Register</button>
             </div>
-            
+
         </form>
     </div>
 </div>
