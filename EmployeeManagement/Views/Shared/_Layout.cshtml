@@ -37,13 +37,22 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a asp-controller="home" asp-action="index" class="nav-link">
+                        <a asp-controller="Home" asp-action="Index" class="nav-link">
                             List
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a asp-controller="home" asp-action="create" class="nav-link">
+                        <a asp-controller="Home" asp-action="Create" class="nav-link">
                             Create
+                        </a>
+                    </li>
+                   
+                </ul>
+
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-3">
+                        <a asp-controller="Account" asp-action="Register" class="nav-link">
+                            Register
                         </a>
                     </li>
                 </ul>
