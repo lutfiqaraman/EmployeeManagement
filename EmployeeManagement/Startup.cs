@@ -4,6 +4,7 @@ using EmployeeManagement.DataAccess.Repositories.Employees;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +27,14 @@ namespace EmployeeManagement
         {
             services.AddDbContextPool<AppDbContext>(
                 options => options.UseSqlServer(Config.GetConnectionString("EMSConnection")));
+
+
+            services
+                .AddIdentity<IdentityUser, IdentityRole>(options =>
+                {
+                    options.Password.RequiredLength = 9;
+                })
+                .AddEntityFrameworkStores<AppDbContext>();
 
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddMvc(options => options.EnableEndpointRouting = false);
