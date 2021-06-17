@@ -16,6 +16,13 @@ namespace EmployeeManagement.Presentation.Controllers
             SignInManager = signInManager;
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await SignInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpGet]
         public IActionResult Register()
         {
