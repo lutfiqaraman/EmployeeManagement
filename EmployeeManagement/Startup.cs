@@ -28,13 +28,6 @@ namespace EmployeeManagement
             services.AddDbContextPool<AppDbContext>(
                 options => options.UseSqlServer(Config.GetConnectionString("EMSConnection")));
 
-            //services
-            //    .AddIdentity<IdentityUser, IdentityRole>(options =>
-            //    {
-            //        options.Password.RequiredLength = 9;
-            //    })
-            //    .AddEntityFrameworkStores<AppDbContext>();
-
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddDAServices();
