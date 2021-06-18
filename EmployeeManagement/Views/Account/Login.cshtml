@@ -1,10 +1,10 @@
-﻿@model RegisterViewModel
+﻿@model LoginViewModel
 
-@{
-    ViewBag.Title = "EMS - User Registration";
+@{ 
+    ViewBag.Title = "EMS - Login";
 }
 
-<h1>User Registration</h1>
+<h1>User Login</h1>
 
 <div class="row">
     <div class="col-md-12">
@@ -26,16 +26,17 @@
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label asp-for="ConfirmPassword" class="col-sm-2 col-form-label"></label>
-                <div class="col-sm-12">
-                    <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
-                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            <div class="mb-4">
+                <div class="form-check">
+                    <input asp-for="RememberMe" class="form-check-input" type="checkbox" value="" id="CheckRememberMe">
+                    <label class="form-check-label" for="CheckRememberMe">
+                        @Html.DisplayNameFor(m => m.RememberMe)
+                    </label>
                 </div>
             </div>
 
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary">Register</button>
+                <button type="submit" class="btn btn-primary">Login</button>
             </div>
 
         </form>
