@@ -1,6 +1,7 @@
 ﻿using EmployeeManagement.DataAccess.Repositories.Employees;
 using EmployeeManagement.DataAccess.Repositories.Employees.Dto;
 using EmployeeManagement.Presentation.Models.Employees;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -52,12 +53,14 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create(EmployeeCreateViewModel model)
         {
             if (ModelState.IsValid)
@@ -83,6 +86,7 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Edit(int id)
         {
             EmployeeDto model = EmployeeRepository.GetEmployee(id);
@@ -100,6 +104,7 @@ namespace EmployeeManagement.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Edit(EmployeeEditViewModel model)
         {
             if (ModelState.IsValid)
