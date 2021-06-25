@@ -5,3 +5,24 @@
 }
 
 <h1>All Roles</h1>
+
+@if(Model.Any())
+{
+
+}
+else
+{
+    <div class="card">
+        <div class="card-header">
+            No roles created roles yet
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Use the button below to create a role
+            </h5>
+            <a class="btn btn-primary" asp-controller="Administration" asp-action="CreateRole">
+                Create Role
+            </a>
+        </div>
+    </div>
+}
