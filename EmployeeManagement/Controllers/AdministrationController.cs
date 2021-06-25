@@ -50,5 +50,12 @@ namespace EmployeeManagement.Presentation.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult ListRoles()
+        {
+            IQueryable<IdentityRole> roles = RoleManager.Roles;
+            return View(roles);
+        }
     }
 }
