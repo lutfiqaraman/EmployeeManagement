@@ -57,5 +57,17 @@ namespace EmployeeManagement.Presentation.Controllers
             IQueryable<IdentityRole> roles = RoleManager.Roles;
             return View(roles);
         }
+
+        [HttpGet]
+        public IActionResult EditRole()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult EditRole(EditRoleViewModel model)
+        {
+            return View(model);
+        }
     }
 }
