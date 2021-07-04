@@ -5,3 +5,24 @@
 }
 
 <h1>Edit the Role</h1>
+
+@{
+    var data = ViewData["Message"];
+}
+
+<form method="post">
+
+    <div class="mb-3">
+        <label asp-for="RoleName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-12">
+            <input asp-for="RoleName" class="form-control" placeholder="Email" />
+            <span asp-validation-for="RoleName" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a asp-controller="Administration" asp-action="ListRoles" class="btn btn-primary">Cancel</a>
+    </div>
+
+</form>

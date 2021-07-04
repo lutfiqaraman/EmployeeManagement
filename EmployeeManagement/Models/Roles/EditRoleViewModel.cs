@@ -7,6 +7,6 @@ namespace EmployeeManagement.Presentation.Models.Roles
 {
     public class EditRoleViewModel : CreateRoleViewModel
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
     }
 }

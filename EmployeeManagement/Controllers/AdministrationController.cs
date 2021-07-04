@@ -59,9 +59,17 @@ namespace EmployeeManagement.Presentation.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditRole()
+        public async Task<IActionResult> EditRole(string id)
         {
-            return View();
+            IdentityRole result = await RoleManager.FindByIdAsync(id);
+
+            EditRoleViewModel model = new EditRoleViewModel()
+            {
+                Id       = result.Id,
+                RoleName = result.Name
+            };
+
+            return View(model);
         }
 
         [HttpPost]
