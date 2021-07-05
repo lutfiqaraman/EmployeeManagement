@@ -73,9 +73,33 @@ namespace EmployeeManagement.Presentation.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditRole(EditRoleViewModel model)
+        public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {
-            return View(model);
+            IdentityRole role = await RoleManager.FindByIdAsync(model.Id);
+
+            if (role == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                role.Name = model.RoleName;
+                role.NormalizedName = model.RoleName.ToUpper();
+
+                IdentityResult result = await RoleManager.UpdateAsync(role);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListRoles");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return View(model);
+            }
         }
     }
 }
