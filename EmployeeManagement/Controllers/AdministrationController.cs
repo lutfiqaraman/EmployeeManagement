@@ -13,10 +13,12 @@ namespace EmployeeManagement.Presentation.Controllers
     public class AdministrationController : Controller
     {
         public RoleManager<IdentityRole> RoleManager { get; }
+        public UserManager<IdentityUser> UserManager { get; }
 
-        public AdministrationController(RoleManager<IdentityRole> roleManager)
+        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
         {
             RoleManager = roleManager;
+            UserManager = userManager;
         }
 
         [HttpGet]
@@ -61,13 +63,26 @@ namespace EmployeeManagement.Presentation.Controllers
         [HttpGet]
         public async Task<IActionResult> EditRole(string id)
         {
-            IdentityRole result = await RoleManager.FindByIdAsync(id);
+            IdentityRole role = await RoleManager.FindByIdAsync(id);
+
+            if (role == null)
+            {
+                return View("Error");
+            }
 
             EditRoleViewModel model = new EditRoleViewModel()
             {
-                Id       = result.Id,
-                RoleName = result.Name
+                Id       = role.Id,
+                RoleName = role.Name
             };
+
+            foreach (var user in UserManager.Users)
+            {
+                if (await UserManager.IsInRoleAsync(user, role.Name)) 
+                {
+                    model.Users.Add(user.UserName);
+                };
+            }
 
             return View(model);
         }
