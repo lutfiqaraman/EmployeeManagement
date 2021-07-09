@@ -43,29 +43,9 @@
             }
         </div>
         <div class="card-footer">
-            <a class="btn btn-primary" id="addUser">Add User</a>
-            <a class="btn btn-primary" id="removeUser">Remove User</a>
+            <a asp-controller="Administration" asp-action="EditUsersInRole" asp-route-roleId="@Model.Id" 
+               class="btn btn-primary">Add or Remove Users</a>
         </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
 </form>

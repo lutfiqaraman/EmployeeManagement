@@ -8,12 +8,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagement.Presenta
 		{6F977F76-D0AB-499D-A0AB-0775EA630C36} = {6F977F76-D0AB-499D-A0AB-0775EA630C36}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.DataAccess", "EmployeeManagement.DataAccess\EmployeeManagement.DataAccess.csproj", "{6F977F76-D0AB-499D-A0AB-0775EA630C36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagement.DataAccess", "EmployeeManagement.DataAccess\EmployeeManagement.DataAccess.csproj", "{6F977F76-D0AB-499D-A0AB-0775EA630C36}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D5A5EDE3-44FD-44D0-B12E-709820159F6E} = {D5A5EDE3-44FD-44D0-B12E-709820159F6E}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.Domain", "EmployeeManagement.Domain\EmployeeManagement.Domain.csproj", "{D5A5EDE3-44FD-44D0-B12E-709820159F6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagement.Domain", "EmployeeManagement.Domain\EmployeeManagement.Domain.csproj", "{D5A5EDE3-44FD-44D0-B12E-709820159F6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
