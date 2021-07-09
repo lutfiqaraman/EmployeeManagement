@@ -116,5 +116,10 @@ namespace EmployeeManagement.Presentation.Controllers
                 return View(model);
             }
         }
+
+        public IActionResult EditUsersInRole()
+        {
+            return View();
+        }
     }
 }
