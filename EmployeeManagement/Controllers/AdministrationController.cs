@@ -119,7 +119,8 @@ namespace EmployeeManagement.Presentation.Controllers
 
         public IActionResult EditUsersInRole()
         {
-            return View();
+            IQueryable<IdentityUser> users = UserManager.Users;
+            return View(users);
         }
     }
 }

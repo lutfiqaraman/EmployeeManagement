@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<IdentityUser>
 
 <form class="mt-3" method="post">
 
@@ -7,7 +7,15 @@
             <h3>Add or Remove Users from this Role</h3>
         </div>
         <div class="card-body">
-            <p>Your Body is here</p>
+            @foreach (var user in Model)
+            {
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="">
+                    <label class="form-check-label">
+                        @user.Email
+                    </label>
+                </div>
+            }
         </div>
         <div class="card-footer">
             <a href="#" class="btn btn-primary">Update</a>
