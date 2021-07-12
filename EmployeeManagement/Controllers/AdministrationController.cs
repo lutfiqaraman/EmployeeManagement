@@ -117,10 +117,17 @@ namespace EmployeeManagement.Presentation.Controllers
             }
         }
 
+        [HttpGet]
         public IActionResult EditUsersInRole()
         {
             IQueryable<IdentityUser> users = UserManager.Users;
             return View(users);
+        }
+
+        [HttpPost]
+        public IActionResult EditUsersInRole(int id)
+        {
+            return View();
         }
     }
 }
