@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -125,7 +123,7 @@ namespace EmployeeManagement.Presentation.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditUsersInRole(int id)
+        public IActionResult EditUsersInRole(EditRoleViewModel model)
         {
             return View();
         }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<IdentityUser>
+﻿@model IEnumerable<UserRoleViewModal>
 
 <form class="mt-3" method="post">
 
@@ -12,7 +12,7 @@
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="">
                     <label class="form-check-label">
-                        @user.Email
+                        @user.UserName
                     </label>
                 </div>
             }
