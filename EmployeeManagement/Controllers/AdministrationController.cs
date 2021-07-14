@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -116,10 +117,40 @@ namespace EmployeeManagement.Presentation.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditUsersInRole()
+        public async Task<IActionResult> EditUsersInRole(string roleId)
         {
-            IQueryable<IdentityUser> users = UserManager.Users;
-            return View(users);
+            ViewBag.roleId = roleId;
+            IdentityRole role = await RoleManager.FindByIdAsync(roleId);
+
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
+                return View("NotFound");
+            }
+
+            List<UserRoleViewModal> model = new List<UserRoleViewModal>();
+
+            foreach (var user in UserManager.Users)
+            {
+                UserRoleViewModal UserRoleViewModal = new UserRoleViewModal()
+                {
+                    UserId = user.Id,
+                    UserName = user.UserName
+                };
+
+                if (await UserManager.IsInRoleAsync(user, role.Name))
+                {
+                    UserRoleViewModal.IsSelected = true;
+                } 
+                else
+                {
+                    UserRoleViewModal.IsSelected = false;
+                }
+
+                model.Add(UserRoleViewModal);
+            }
+
+            return View(model);
         }
 
         [HttpPost]
