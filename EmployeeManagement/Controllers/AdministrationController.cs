@@ -154,9 +154,9 @@ namespace EmployeeManagement.Presentation.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditUsersInRole(EditRoleViewModel model)
+        public IActionResult EditUsersInRole(List<UserRoleViewModal> model, string roleId)
         {
-            return View();
+            return View(model);
         }
     }
 }
