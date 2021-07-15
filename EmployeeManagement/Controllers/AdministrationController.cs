@@ -154,9 +154,50 @@ namespace EmployeeManagement.Presentation.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditUsersInRole(List<UserRoleViewModal> model, string roleId)
+        public async Task<IActionResult> EditUsersInRole(List<UserRoleViewModal> model, string roleId)
         {
-            return View(model);
+            IdentityRole role = await RoleManager.FindByIdAsync(roleId);
+
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
+                return View("NotFound");
+            }
+
+            for (int i = 0; i < model.Count; i++)
+            {
+                IdentityUser user = await UserManager.FindByIdAsync(model[i].UserId);
+                IdentityResult result = null;
+
+                bool isInRole = await UserManager.IsInRoleAsync(user, role.Name);
+
+                if(model[i].IsSelected && !isInRole)
+                {
+                    result = await UserManager.AddToRoleAsync(user, role.Name);
+                }
+                else if (!model[i].IsSelected && isInRole)
+                {
+                    result = await UserManager.RemoveFromRoleAsync(user, role.Name);
+                } 
+                else
+                {
+                    continue;
+                }
+
+                if(result.Succeeded)
+                {
+                    if (i < (model.Count - 1))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        return RedirectToAction("EditRole", new { Id = roleId });
+                    }
+                }
+            }
+
+            return RedirectToAction("EditRole", new { Id = roleId });
         }
     }
 }
