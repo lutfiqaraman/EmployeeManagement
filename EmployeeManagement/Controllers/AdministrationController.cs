@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement.Presentation.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AdministrationController : Controller
     {
         public RoleManager<IdentityRole> RoleManager { get; }
