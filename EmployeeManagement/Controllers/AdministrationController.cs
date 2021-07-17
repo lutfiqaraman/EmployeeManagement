@@ -199,5 +199,18 @@ namespace EmployeeManagement.Presentation.Controllers
 
             return RedirectToAction("EditRole", new { Id = roleId });
         }
+
+        [HttpGet]
+        public IActionResult ListUsers()
+        {
+            IQueryable<IdentityUser> users = UserManager.Users;
+            return View(users);
+        }
+
+        [HttpGet]
+        public IActionResult CreateUser()
+        {
+            return View();
+        }
     }
 }
