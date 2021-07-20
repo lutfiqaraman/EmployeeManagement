@@ -2,7 +2,7 @@
 
 namespace EmployeeManagement.Presentation.Models.Users
 {
-    public class CreateUserView
+    public class CreateUserViewModel
     {
         [Required]
         [EmailAddress]
