@@ -206,11 +206,5 @@ namespace EmployeeManagement.Presentation.Controllers
             IQueryable<IdentityUser> users = UserManager.Users;
             return View(users);
         }
-
-        [HttpGet]
-        public IActionResult CreateUser()
-        {
-            return View();
-        }
     }
 }
