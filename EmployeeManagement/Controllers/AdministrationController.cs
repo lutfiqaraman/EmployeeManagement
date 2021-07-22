@@ -1,9 +1,11 @@
 ﻿using EmployeeManagement.Presentation.Models.Roles;
+using EmployeeManagement.Presentation.Models.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace EmployeeManagement.Presentation.Controllers
@@ -205,6 +207,32 @@ namespace EmployeeManagement.Presentation.Controllers
         {
             IQueryable<IdentityUser> users = UserManager.Users;
             return View(users);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string id)
+        {
+            IdentityUser user = await UserManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                return View("Error");
+            }
+
+            IList<Claim>  userClaims = await UserManager.GetClaimsAsync(user);
+            IList<string> userRoles  = await UserManager.GetRolesAsync(user);
+
+            EditUserViewModel model = new EditUserViewModel()
+            {
+                Id       = user.Id,
+                Email    = user.Email,
+                UserName = user.UserName,
+                Claims   = userClaims.Select(x => x.Value).ToList(),
+                Roles    = userRoles
+
+            };
+
+            return View(model);
         }
     }
 }
