@@ -234,5 +234,34 @@ namespace EmployeeManagement.Presentation.Controllers
 
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(EditUserViewModel model)
+        {
+            IdentityUser user = await UserManager.FindByIdAsync(model.Id);
+
+            if (user == null)
+            {
+                return View("Error");
+            } else
+            {
+                user.Email = model.Email;
+                user.UserName = model.UserName;
+
+                IdentityResult result = await UserManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return View(model);
+            }
+        }
     }
 }
