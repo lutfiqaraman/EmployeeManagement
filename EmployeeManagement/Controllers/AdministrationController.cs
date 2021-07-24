@@ -263,5 +263,13 @@ namespace EmployeeManagement.Presentation.Controllers
                 return View(model);
             }
         }
+
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            IdentityUser user = await UserManager.FindByIdAsync(id);
+            await UserManager.DeleteAsync(user);
+
+            return View("ListUsers");
+        }
     }
 }
