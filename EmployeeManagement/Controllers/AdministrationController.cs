@@ -267,7 +267,20 @@ namespace EmployeeManagement.Presentation.Controllers
         public async Task<IActionResult> DeleteUser(string id)
         {
             IdentityUser user = await UserManager.FindByIdAsync(id);
-            await UserManager.DeleteAsync(user);
+
+            if (user == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                IdentityResult result = await UserManager.DeleteAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+                }
+            }
 
             return View("ListUsers");
         }
