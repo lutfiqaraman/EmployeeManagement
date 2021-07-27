@@ -243,7 +243,8 @@ namespace EmployeeManagement.Presentation.Controllers
             if (user == null)
             {
                 return View("Error");
-            } else
+            } 
+            else
             {
                 user.Email = model.Email;
                 user.UserName = model.UserName;
