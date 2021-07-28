@@ -118,6 +118,28 @@ namespace EmployeeManagement.Presentation.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> DeleteRole(string id)
+        {
+            IdentityRole role = await RoleManager.FindByIdAsync(id);
+
+            if (role == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                IdentityResult result = await RoleManager.DeleteAsync(role);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListRoles");
+                }
+            }
+
+            return View("ListRoles");
+        }
+
         [HttpGet]
         public async Task<IActionResult> EditUsersInRole(string roleId)
         {
