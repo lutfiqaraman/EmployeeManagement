@@ -64,7 +64,8 @@ namespace EmployeeManagement.Presentation.Controllers
         [HttpGet]
         public async Task<IActionResult> EditRole(string id)
         {
-            IdentityRole role = await RoleManager.FindByIdAsync(id);
+            string decryptId = Encryption.Decrypt(id);
+            IdentityRole role = await RoleManager.FindByIdAsync(decryptId);
 
             if (role == null)
             {
