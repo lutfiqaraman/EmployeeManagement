@@ -1,6 +1,7 @@
 ﻿using EmployeeManagement.Domain.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace EmployeeManagement.DataAccess.EntityFramework
 {
@@ -18,6 +19,11 @@ namespace EmployeeManagement.DataAccess.EntityFramework
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.SeedEmployeeData();
+
+            foreach (var foreignKey in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
         }
     }
 }
