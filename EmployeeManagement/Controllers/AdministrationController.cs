@@ -235,7 +235,8 @@ namespace EmployeeManagement.Presentation.Controllers
         [HttpGet]
         public async Task<IActionResult> EditUser(string id)
         {
-            IdentityUser user = await UserManager.FindByIdAsync(id);
+            string decryptId = Encryption.Decrypt(id);
+            IdentityUser user = await UserManager.FindByIdAsync(decryptId);
 
             if (user == null)
             {
