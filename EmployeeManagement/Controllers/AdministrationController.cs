@@ -3,6 +3,7 @@ using EmployeeManagement.Presentation.Models.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -147,9 +148,10 @@ namespace EmployeeManagement.Presentation.Controllers
 
                     return View("ListRoles");
                 }
-                catch (System.Exception)
+                catch (Exception)
                 {
-                    throw;
+                    ViewBag.ErrorMessage = $"{role.Name} is in use, please empty the role then delete it ... ";
+                    return View("Error");
                 }
             }
         }
