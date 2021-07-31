@@ -130,15 +130,28 @@ namespace EmployeeManagement.Presentation.Controllers
             }
             else
             {
-                IdentityResult result = await RoleManager.DeleteAsync(role);
 
-                if (result.Succeeded)
+                try
                 {
-                    return RedirectToAction("ListRoles");
+                    IdentityResult result = await RoleManager.DeleteAsync(role);
+
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("ListRoles");
+                    }
+
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+
+                    return View("ListRoles");
+                }
+                catch (System.Exception)
+                {
+                    throw;
                 }
             }
-
-            return View("ListRoles");
         }
 
         [HttpGet]

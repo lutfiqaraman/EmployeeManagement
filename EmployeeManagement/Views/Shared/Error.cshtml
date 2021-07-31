@@ -1,1 +1,9 @@
-﻿<p>An error occured when the request is in processing</p>
+﻿@if (@ViewBag.ErrorTitle == null)
+{
+    <p>An error occured when the request is in processing</p>
+}
+else
+{
+    <p class="text-danger">@ViewBag.ErrorMessage</p>
+}
+
