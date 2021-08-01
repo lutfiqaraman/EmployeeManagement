@@ -159,8 +159,9 @@ namespace EmployeeManagement.Presentation.Controllers
         [HttpGet]
         public async Task<IActionResult> EditUsersInRole(string roleId)
         {
-            ViewBag.roleId = roleId;
-            IdentityRole role = await RoleManager.FindByIdAsync(roleId);
+            string decryptedID = Encryption.Decrypt(roleId);
+            ViewBag.roleId = decryptedID;
+            IdentityRole role = await RoleManager.FindByIdAsync(decryptedID);
 
             if (role == null)
             {
@@ -196,7 +197,8 @@ namespace EmployeeManagement.Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> EditUsersInRole(List<UserRoleViewModal> model, string roleId)
         {
-            IdentityRole role = await RoleManager.FindByIdAsync(roleId);
+            string decryptedID = Encryption.Decrypt(roleId);
+            IdentityRole role = await RoleManager.FindByIdAsync(decryptedID);
 
             if (role == null)
             {
