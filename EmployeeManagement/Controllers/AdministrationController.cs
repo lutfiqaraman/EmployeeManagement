@@ -339,6 +339,16 @@ namespace EmployeeManagement.Presentation.Controllers
             }
 
             var model = new List<UserRolesViewModel>();
+
+            foreach(var role in RoleManager.Roles)
+            {
+                var userRolesViewModel = new UserRolesViewModel()
+                {
+                    RoleId = role.Id,
+                    RoleName = role.Name
+                };
+            }
+
             return View();
         }
     }
