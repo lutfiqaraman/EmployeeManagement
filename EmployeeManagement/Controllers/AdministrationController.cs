@@ -326,5 +326,20 @@ namespace EmployeeManagement.Presentation.Controllers
 
             return View("ListUsers");
         }
+
+        public async Task<IActionResult> ManageUserRoles(string userId)
+        {
+            ViewBag.userId = userId;
+
+            IdentityUser user = await UserManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                return View("NotFound");
+            }
+
+            var model = new List<UserRolesViewModel>();
+            return View();
+        }
     }
 }
