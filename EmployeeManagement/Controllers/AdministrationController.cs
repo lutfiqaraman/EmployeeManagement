@@ -347,9 +347,16 @@ namespace EmployeeManagement.Presentation.Controllers
                     RoleId = role.Id,
                     RoleName = role.Name
                 };
+
+                if (await UserManager.IsInRoleAsync(user, role.Name))
+                    userRolesViewModel.IsSelected = true;
+                else
+                    userRolesViewModel.IsSelected = false;
+
+                model.Add(userRolesViewModel);
             }
 
-            return View();
+            return View(model);
         }
     }
 }
