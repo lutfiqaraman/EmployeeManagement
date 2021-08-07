@@ -375,7 +375,7 @@ namespace EmployeeManagement.Presentation.Controllers
 
             if (!result.Succeeded)
             {
-                ModelState.AddModelError("", "Cannot remove user existing roles");
+                ModelState.AddModelError("", "Cannot remove user from existing roles");
                 return View(model);
             }
 
