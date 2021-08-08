@@ -391,5 +391,19 @@ namespace EmployeeManagement.Presentation.Controllers
             return RedirectToAction("EditUser", new { Id = userId });
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ManageUserClaims(string userId)
+        {
+            var user = await UserManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
+                return View("NotFound");
+            }
+
+            return View();
+        }
+
     }
 }
