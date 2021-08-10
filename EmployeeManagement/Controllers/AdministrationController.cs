@@ -1,4 +1,5 @@
-﻿using EmployeeManagement.Presentation.Models.Roles;
+﻿using EmployeeManagement.Presentation.Models.Claims;
+using EmployeeManagement.Presentation.Models.Roles;
 using EmployeeManagement.Presentation.Models.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -402,7 +403,29 @@ namespace EmployeeManagement.Presentation.Controllers
                 return View("NotFound");
             }
 
-            return View();
+            IList<Claim> existingUserClaims = await UserManager.GetClaimsAsync(user);
+
+            var model = new UserClaimsViewModel()
+            {
+                UserId = userId
+            };
+
+            foreach (Claim claim in ClaimsStore.AllClaims)
+            {
+                UserClaim userClaim = new UserClaim
+                {
+                    ClaimType = claim.Type
+                };
+
+                if (existingUserClaims.Any(c => c.Type == claim.Type))
+                {
+                    userClaim.IsSelected = true;
+                }
+
+                model.Claims.Add(userClaim);
+            }
+
+            return View(model);
         }
 
     }
