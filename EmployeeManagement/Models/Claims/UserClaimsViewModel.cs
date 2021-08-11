@@ -6,7 +6,7 @@ namespace EmployeeManagement.Presentation.Models.Claims
     {
         public UserClaimsViewModel()
         {
-            List<UserClaim> Claims = new List<UserClaim>();
+            Claims = new List<UserClaim>();
         }
 
         public string UserId { get; set; }
