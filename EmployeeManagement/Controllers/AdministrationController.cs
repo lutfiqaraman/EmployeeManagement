@@ -428,5 +428,19 @@ namespace EmployeeManagement.Presentation.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ManageUserClaims(UserClaimsViewModel model)
+        {
+            var user = await UserManager.FindByIdAsync(model.UserId);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {model.UserId} cannot be found";
+                return View("NotFound");
+            }
+
+            return View(model);
+        }
+
     }
 }
