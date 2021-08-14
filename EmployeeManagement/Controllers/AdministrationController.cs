@@ -439,7 +439,25 @@ namespace EmployeeManagement.Presentation.Controllers
                 return View("NotFound");
             }
 
-            return View(model);
+            var claims = await UserManager.GetClaimsAsync(user);
+            var result = await UserManager.RemoveClaimsAsync(user, claims);
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("Error", "Cannot remove user existing claims");
+                return View(model);
+            }
+
+            result = await UserManager.AddClaimsAsync(user,
+                model.Claims.Where(c => c.IsSelected).Select(c => new Claim(c.ClaimType, c.ClaimType)));
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("Error", "Cannot add selected claims");
+                return View(model);
+            }
+
+            return RedirectToAction("EditUser", new { Id = model.UserId });
         }
 
     }
