@@ -71,7 +71,7 @@
             }
         </div>
         <div class="card-footer">
-            <a asp-action="ManageUserClaims" asp-route-userId="@Model.Id" class="btn btn-primary">
+            <a asp-action="ManageUserClaims" asp-route-userId="@EmployeeManagement.Presentation.Encryption.Encrypt(Convert.ToString(@Model.Id))" class="btn btn-primary">
                 Manage Claims
             </a>
         </div>

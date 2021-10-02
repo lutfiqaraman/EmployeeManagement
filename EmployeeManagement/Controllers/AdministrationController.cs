@@ -331,7 +331,6 @@ namespace EmployeeManagement.Presentation.Controllers
         public async Task<IActionResult> ManageUserRoles(string userId)
         {
             ViewBag.userId = userId;
-
             IdentityUser user = await UserManager.FindByIdAsync(userId);
 
             if (user == null)
@@ -395,7 +394,9 @@ namespace EmployeeManagement.Presentation.Controllers
         [HttpGet]
         public async Task<IActionResult> ManageUserClaims(string userId)
         {
-            var user = await UserManager.FindByIdAsync(userId);
+            string decryptedUserId = Encryption.Decrypt(userId);
+
+            IdentityUser user = await UserManager.FindByIdAsync(decryptedUserId);
 
             if (user == null)
             {
