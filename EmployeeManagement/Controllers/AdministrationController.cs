@@ -432,6 +432,7 @@ namespace EmployeeManagement.Presentation.Controllers
         public async Task<IActionResult> ManageUserClaims(UserClaimsViewModel model)
         {
             var user = await UserManager.FindByIdAsync(model.UserId);
+            string encryptedId = Encryption.Encrypt(model.UserId);
 
             if (user == null)
             {
@@ -457,7 +458,7 @@ namespace EmployeeManagement.Presentation.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("EditUser", new { Id = model.UserId });
+            return RedirectToAction("EditUser", new { Id = encryptedId });
         }
 
     }
