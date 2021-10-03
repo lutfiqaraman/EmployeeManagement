@@ -330,8 +330,10 @@ namespace EmployeeManagement.Presentation.Controllers
 
         public async Task<IActionResult> ManageUserRoles(string userId)
         {
-            ViewBag.userId = userId;
-            IdentityUser user = await UserManager.FindByIdAsync(userId);
+            string decryptedUserId = Encryption.Decrypt(userId);
+
+            ViewBag.userId = decryptedUserId;
+            IdentityUser user = await UserManager.FindByIdAsync(decryptedUserId);
 
             if (user == null)
             {
