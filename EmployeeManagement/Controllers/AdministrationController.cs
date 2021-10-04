@@ -122,6 +122,7 @@ namespace EmployeeManagement.Presentation.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "DeleteRolePolicy")]
         public async Task<IActionResult> DeleteRole(string id)
         {
             IdentityRole role = await RoleManager.FindByIdAsync(id);

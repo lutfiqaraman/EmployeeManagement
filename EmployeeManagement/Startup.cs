@@ -28,6 +28,11 @@ namespace EmployeeManagement
             services.AddDbContextPool<AppDbContext>(
                 options => options.UseSqlServer(Config.GetConnectionString("EMSConnection")));
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("DeleteRolePolicy", policy => policy.RequireClaim("Delete Role"));
+            });
+
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddDAServices();
