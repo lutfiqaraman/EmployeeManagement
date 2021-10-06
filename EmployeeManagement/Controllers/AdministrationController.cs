@@ -64,6 +64,7 @@ namespace EmployeeManagement.Presentation.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> EditRole(string id)
         {
             string decryptId = Encryption.Decrypt(id);
@@ -92,6 +93,7 @@ namespace EmployeeManagement.Presentation.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {
             IdentityRole role = await RoleManager.FindByIdAsync(model.Id);
