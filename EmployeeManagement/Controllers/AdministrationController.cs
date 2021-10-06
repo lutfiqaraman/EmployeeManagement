@@ -331,11 +331,12 @@ namespace EmployeeManagement.Presentation.Controllers
             return View("ListUsers");
         }
 
+        [HttpGet]
         public async Task<IActionResult> ManageUserRoles(string userId)
         {
-            string decryptedUserId = Encryption.Decrypt(userId);
+            ViewBag.userId = userId;
 
-            ViewBag.userId = decryptedUserId;
+            string decryptedUserId = Encryption.Decrypt(userId);
             IdentityUser user = await UserManager.FindByIdAsync(decryptedUserId);
 
             if (user == null)
