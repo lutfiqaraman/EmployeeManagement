@@ -368,11 +368,12 @@ namespace EmployeeManagement.Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> ManageUserRoles(List<UserRolesViewModel> model, string userId)
         {
-            var user = await UserManager.FindByIdAsync(userId);
+            string decryptedUser = Encryption.Decrypt(userId);
+            IdentityUser user = await UserManager.FindByIdAsync(decryptedUser);
 
             if (user == null)
             {
-                ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
+                ViewBag.ErrorMessage = $"User with Id = {decryptedUser} cannot be found";
                 return View("NotFound");
             }
 
