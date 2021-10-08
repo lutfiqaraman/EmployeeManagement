@@ -18,6 +18,13 @@ namespace EmployeeManagement.Presentation.Controllers
         public RoleManager<IdentityRole> RoleManager { get; }
         public UserManager<IdentityUser> UserManager { get; }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
         public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
         {
             RoleManager = roleManager;
@@ -439,12 +446,12 @@ namespace EmployeeManagement.Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> ManageUserClaims(UserClaimsViewModel model)
         {
-            var user = await UserManager.FindByIdAsync(model.UserId);
-            string encryptedId = Encryption.Encrypt(model.UserId);
-
+            string decryptedUserId = Encryption.Decrypt(model.UserId);
+            IdentityUser user = await UserManager.FindByIdAsync(decryptedUserId);
+            
             if (user == null)
             {
-                ViewBag.ErrorMessage = $"User with Id = {model.UserId} cannot be found";
+                ViewBag.ErrorMessage = $"User with Id = {decryptedUserId} cannot be found";
                 return View("NotFound");
             }
 
@@ -466,7 +473,7 @@ namespace EmployeeManagement.Presentation.Controllers
                 return View(model);
             }
 
-            return RedirectToAction("EditUser", new { Id = encryptedId });
+            return RedirectToAction("EditUser", new { Id = model.UserId });
         }
 
     }

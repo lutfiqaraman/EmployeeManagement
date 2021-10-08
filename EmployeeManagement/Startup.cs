@@ -34,6 +34,11 @@ namespace EmployeeManagement
                 options.AddPolicy("AdminRolePolicy", policy => policy.RequireRole("Admin"));
             });
 
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = new PathString("/Administration/AccessDenied");
+            });
+
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddDAServices();
