@@ -103,7 +103,8 @@ namespace EmployeeManagement.Presentation.Controllers
         [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {
-            IdentityRole role = await RoleManager.FindByIdAsync(model.Id);
+            string decryptedId = Encryption.Decrypt(model.Id);
+            IdentityRole role = await RoleManager.FindByIdAsync(decryptedId);
 
             if (role == null)
             {
