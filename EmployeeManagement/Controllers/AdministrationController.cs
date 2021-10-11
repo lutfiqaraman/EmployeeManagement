@@ -71,7 +71,6 @@ namespace EmployeeManagement.Presentation.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> EditRole(string id)
         {
             string decryptId = Encryption.Decrypt(id);
@@ -100,7 +99,6 @@ namespace EmployeeManagement.Presentation.Controllers
         }
 
         [HttpPost]
-        [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {
             string decryptedId = Encryption.Decrypt(model.Id);
@@ -340,6 +338,7 @@ namespace EmployeeManagement.Presentation.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> ManageUserRoles(string userId)
         {
             ViewBag.userId = userId;
@@ -374,6 +373,7 @@ namespace EmployeeManagement.Presentation.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "EditRolePolicy")]
         public async Task<IActionResult> ManageUserRoles(List<UserRolesViewModel> model, string userId)
         {
             string decryptedUser = Encryption.Decrypt(userId);

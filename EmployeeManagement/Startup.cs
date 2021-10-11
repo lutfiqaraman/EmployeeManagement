@@ -1,6 +1,8 @@
 using EmployeeManagement.DataAccess;
 using EmployeeManagement.DataAccess.EntityFramework;
 using EmployeeManagement.DataAccess.Repositories.Employees;
+using EmployeeManagement.Presentation.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -32,14 +34,10 @@ namespace EmployeeManagement
                 options.AddPolicy("DeleteRolePolicy", 
                     policy => policy.RequireClaim("Delete Role"));
 
-                // User is in Admin Role and had a claim Edit Role OR has a role Super Admin
-                options.AddPolicy("EditRolePolicy",
-                    policy => policy.RequireAssertion(context =>
-                        context.User.IsInRole("Admin") && context.User.HasClaim(claim => claim.Type == "Edit Role" && claim.Value == "true") 
-                        || context.User.IsInRole("Super Admin")));
-                
-                options.AddPolicy("AdminRolePolicy", 
-                    policy => policy.RequireRole("Admin"));
+                options.AddPolicy("EditRolePolicy", 
+                    policy => policy.AddRequirements(new ManageAdminRolesAndClaimsRequirement()));
+
+                options.AddPolicy("AdminRolePolicy", policy => policy.RequireRole("Admin"));
             });
 
             services.ConfigureApplicationCookie(options =>
@@ -48,6 +46,8 @@ namespace EmployeeManagement
             });
 
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddSingleton<IAuthorizationHandler, EditOnlyOtherAdminRolesAndClaimsHandler>();
+
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddDAServices();
         }
