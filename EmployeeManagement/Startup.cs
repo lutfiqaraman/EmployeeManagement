@@ -47,6 +47,7 @@ namespace EmployeeManagement
 
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddSingleton<IAuthorizationHandler, EditOnlyOtherAdminRolesAndClaimsHandler>();
+            services.AddSingleton<IAuthorizationHandler, SuperAdminHandler>();
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
             services.AddDAServices();
