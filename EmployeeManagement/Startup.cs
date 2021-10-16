@@ -40,12 +40,11 @@ namespace EmployeeManagement
                 options.AddPolicy("AdminRolePolicy", policy => policy.RequireRole("Admin"));
             });
 
-            services.AddAuthentication()
-                .AddGoogle(options =>
-                {
-                    options.ClientId = "yyyy";
-                    options.ClientSecret = "xxxx";
-                });
+            services.AddAuthentication().AddGoogle(options =>   
+            {
+                options.ClientId     = Config["Google:ClientId"].ToString();
+                options.ClientSecret = Config["Google:ClientSecret"].ToString();
+            });
 
             services.ConfigureApplicationCookie(options =>
             {
