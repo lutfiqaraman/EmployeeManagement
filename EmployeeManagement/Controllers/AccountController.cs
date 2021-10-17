@@ -1,4 +1,5 @@
 ﻿using EmployeeManagement.Presentation.Models.Users;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -70,7 +71,7 @@ namespace EmployeeManagement.Presentation.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdentityUser user = new IdentityUser { UserName = model.Email, Email = model.Email };
+                IdentityUser user     = new IdentityUser { UserName = model.Email, Email = model.Email };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
@@ -97,9 +98,9 @@ namespace EmployeeManagement.Presentation.Controllers
         [HttpPost]
         public IActionResult ExternalLogin(string provider, string returnUrl)
         {
-            var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
-            var properties  = SignInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
-
+            string redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
+            AuthenticationProperties properties  = SignInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+          
             return new ChallengeResult(provider, properties);
         }
 
@@ -131,7 +132,7 @@ namespace EmployeeManagement.Presentation.Controllers
             else
             {
                 // Get the email claim value
-                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+                string email = info.Principal.FindFirstValue(ClaimTypes.Email);
 
                 if (email != null)
                 {
@@ -158,7 +159,7 @@ namespace EmployeeManagement.Presentation.Controllers
 
                 // If we cannot find the user email we cannot continue
                 ViewBag.ErrorTitle = $"Email claim not received from: {info.LoginProvider}";
-                ViewBag.ErrorMessage = "Please contact support on Pragim@PragimTech.com";
+                ViewBag.ErrorMessage = "Please contact support on admin@EMS.com";
 
                 return View("Error");
             }
