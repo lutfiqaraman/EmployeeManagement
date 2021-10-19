@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,21 +17,25 @@ namespace EmployeeManagement.Presentation.Controllers
     {
         private readonly UserManager<IdentityUser>   UserManager;
         private readonly SignInManager<IdentityUser> SignInManager;
+        private readonly ILogger<AccountController> Logger;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, ILogger<AccountController> logger)
         {
             UserManager   = userManager;
             SignInManager = signInManager;
+            Logger        = logger;
         }
 
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Login(string returnURL)
         {
+            IEnumerable<AuthenticationScheme> authenticationSchemes = await SignInManager.GetExternalAuthenticationSchemesAsync();
+
             LoginViewModel model = new LoginViewModel
             {
                 ReturnUrl = returnURL,
-                ExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+                ExternalLogins = authenticationSchemes.ToList()
             };
 
             return View(model);
@@ -88,18 +93,26 @@ namespace EmployeeManagement.Presentation.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdentityUser user     = new IdentityUser { UserName = model.Email, Email = model.Email };
+                IdentityUser user = new IdentityUser { 
+                    UserName = model.Email, 
+                    Email = model.Email 
+                };
+                
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
+                    string token = await UserManager.GenerateEmailConfirmationTokenAsync(user);
+
                     if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                     {
                         return RedirectToAction("ListUsers", "Administration");
                     }
 
-                    await SignInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ConfirmEmail", "Account", new {
+                        userId = user.Id,
+                        token
+                    }, Request.Scheme);
                 }
 
                 foreach (var error in result.Errors)
@@ -125,12 +138,12 @@ namespace EmployeeManagement.Presentation.Controllers
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
         {
             returnUrl ??= Url.Content("~/");
+            IEnumerable<AuthenticationScheme> authenticationSchemes = await SignInManager.GetExternalAuthenticationSchemesAsync();
 
             LoginViewModel loginViewModel = new LoginViewModel
             {
                 ReturnUrl = returnUrl,
-                ExternalLogins =
-                (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+                ExternalLogins = authenticationSchemes.ToList()
             };
 
             if (remoteError != null)
@@ -200,6 +213,33 @@ namespace EmployeeManagement.Presentation.Controllers
 
                 return View("Error");
             }
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (userId == null || token == null)
+            {
+                return RedirectToAction("index", "home");
+            }
+
+            IdentityUser user = await UserManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"The User is invalid";
+                return View("NotFound");
+            }
+
+            IdentityResult result = await UserManager.ConfirmEmailAsync(user, token);
+
+            if (result.Succeeded)
+            {
+                return View();
+            }
+
+            ViewBag.ErrorTitle = "Email cannot be confirmed";
+            return View("Error");
         }
     }
 }

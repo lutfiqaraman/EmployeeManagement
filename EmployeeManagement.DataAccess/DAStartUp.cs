@@ -11,9 +11,12 @@ namespace EmployeeManagement.DataAccess
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-            services.AddIdentity<IdentityUser, IdentityRole>(options => {
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
                 options.SignIn.RequireConfirmedEmail = true;
-            }).AddEntityFrameworkStores<AppDbContext>();
+            })
+            .AddEntityFrameworkStores<AppDbContext>()
+            .AddDefaultTokenProviders();
 
             return services;
         }
